@@ -33,21 +33,40 @@ namespace ConsoleUI
 
             // Create a list of Vehicle called vehicles
 
+            var garage = new List<Vehicle>();
+
             /*
              * Create 4 instances: 1 Car, 1 Motorcycle, and then 2 instances of type Vehicle (use explicit typing) but use constuctors from derived classes
              * - new it up as one of each derived class
              * Set the properties with object initializer syntax
              */
 
+            Car geo = new Car() { Color = "silver", Make = "Mazda", Model = "Mirage", Year = "2015", SubWoofer = false };
+            Motorcycle klaus = new Motorcycle() { Year="2004", Make="BMW", Model="K1200GT", EngineSize=1196, Style="sport touring"};
+            Vehicle tiff = new Car() { Color = "black", Make="Toyota", Model = "Rav 4", SubWoofer=false, Year="2015" };
+            Vehicle backup = new Motorcycle() { Year="2008", Make="Kawasaki", Model="Versys", EngineSize=649, Style="adventure"};
+
             /*
              * Add the 4 vehicles to the list
              * Using a foreach loop iterate over each of the properties
              */
+            garage.Add(geo);
+            garage.Add(tiff);
+            garage.Add(backup);
+            garage.Add(klaus);
 
+            foreach (Vehicle v in garage)
+            {
+                Console.WriteLine();
+                foreach (var prop in v.GetType().GetProperties())
+                {
+                    Console.WriteLine($"{prop.Name}: {prop.GetValue(v, null)}");
+                }
+            }
             // Call each of the drive methods for one car and one motorcycle
 
             #endregion            
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
